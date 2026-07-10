@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface PalestranteRepository extends JpaRepository<Palestrante, UUID> {
+
+    boolean existsByEmail(String email);
 }
