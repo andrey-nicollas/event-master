@@ -1,5 +1,6 @@
 package com.github.eventmaster_api.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,4 +51,16 @@ public class Evento {
     @UpdateTimestamp
     @Column(name = "atualizado_em", nullable = false)
     private LocalDateTime atualizadoEm;
+
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        this.criadoEm = localDateTime;
+        this.atualizadoEm = localDateTime;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.atualizadoEm = LocalDateTime.now();
+    }
 }
